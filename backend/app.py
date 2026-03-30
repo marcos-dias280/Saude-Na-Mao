@@ -44,6 +44,12 @@ def login_page():
 def register_page():
     return render_template("registrer.html")
 
+@app.route("/teste-key")
+def teste_key():
+    return {
+        "google_api_key_configurada": bool(os.getenv("GOOGLE_API_KEY"))
+    }
+
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=5000, debug=True)

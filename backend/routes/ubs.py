@@ -4,8 +4,6 @@ from flask import Blueprint, request, jsonify
 
 ubs_routes = Blueprint("ubs_routes", __name__)
 
-GOOGLE_API_KEY = os.getenv("GOOGLE_API_KEY")
-
 
 @ubs_routes.route("/buscar_ubs_google", methods=["GET"])
 def buscar_ubs_google():
@@ -13,8 +11,9 @@ def buscar_ubs_google():
         lat = request.args.get("lat")
         lon = request.args.get("lon")
         radius = request.args.get("radius", "8000")
+        google_api_key = os.getenv("GOOGLE_API_KEY")
 
-        if not GOOGLE_API_KEY:
+        if not google_api_key:
             return jsonify({
                 "success": False,
                 "error": "GOOGLE_API_KEY não configurada"
@@ -57,7 +56,7 @@ def buscar_ubs_google():
                 "location": f"{lat},{lon}",
                 "radius": radius,
                 "keyword": keyword,
-                "key": GOOGLE_API_KEY,
+                "key": google_api_key,
                 "language": "pt-BR"
             }
 
