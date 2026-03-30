@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Saúde na Mão</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://api.mapbox.com/mapbox-gl-js/v2.15.0/mapbox-gl.css" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/estilo.css') }}">
+</head>
+<body>
+
+<header>
+    <div class="container navbar">
+        <a href="#home" class="logo">Saúde na Mão</a>
+
+        <button id="menu-toggle" class="menu-toggle" aria-label="Abrir menu">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+
+        <nav id="main-nav">
+            <ul class="nav-links" id="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#features">Recursos</a></li>
+                <li><a href="#queue-status-section">Filas</a></li>
+                <li><a href="#ubs-map-section">UBSs</a></li>
+                <li><a href="#appointment-modal" class="open-modal-btn">Agendar</a></li>
+
+                <li id="nav-login"><a href="/login-page">Login</a></li>
+                <li id="nav-cadastro"><a href="/register-page">Cadastro</a></li>
+
+                <li id="nav-user" style="display:none;">
+                    <span>Olá, <span id="user-name"></span></span>
+                    <button id="logout-btn" type="button">Sair</button>
+                </li>
+            </ul>
+        </nav>
+    </div>
+</header>
+
+<main>
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <h1>Gerencie suas consultas com facilidade</h1>
+            <p>Sua saúde na palma da sua mão.</p>
+            <button class="btn open-modal-btn" type="button">Agendar consulta</button>
+        </div>
+    </section>
+
+    <section class="features" id="features">
+        <div class="container">
+            <h2>Recursos</h2>
+
+            <div class="features-grid">
+                <div class="feature-card">
+                    <i class="fas fa-users"></i>
+                    <h3>Filas</h3>
+                    <p>Acompanhe em tempo real.</p>
+                </div>
+
+                <div class="feature-card">
+                    <i class="fas fa-calendar-check"></i>
+                    <h3>Agendamento</h3>
+                    <p>Marque consultas facilmente.</p>
+                </div>
+
+                <div class="feature-card">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <h3>UBSs</h3>
+                    <p>Encontre unidades próximas.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="queue-status" id="queue-status-section">
+        <div class="container">
+            <h2>Fila</h2>
+
+            <div class="queue-info">
+                <div class="queue-item">
+                    <div class="number" id="queue-number">--</div>
+                    <p>Pessoas</p>
+                </div>
+
+                <div class="queue-item">
+                    <div class="number" id="wait-time">--</div>
+                    <p>Tempo (min)</p>
+                </div>
+            </div>
+
+            <p>Informações atualizadas em tempo real. (Dados fictícios)</p>
+        </div>
+    </section>
+
+    <section class="ubs-map-section" id="ubs-map-section">
+        <div class="container">
+            <h2>UBSs Próximas</h2>
+
+            <button id="find-ubs-btn" class="btn btn-primary" type="button">
+                Localizar
+            </button>
+
+            <div class="map-container" id="ubs-map"></div>
+            <ul id="ubs-list"></ul>
+        </div>
+    </section>
+
+    <section id="minhas-consultas" class="consultas-section">
+        <div class="container">
+            <h2>Minhas Consultas</h2>
+            <div id="consultas-conteudo"></div>
+        </div>
+    </section>
+</main>
+
+<footer>
+    <div class="container">
+        <p>&copy; 2026 Saúde na Mão</p>
+    </div>
+</footer>
+
+<div id="appointment-modal" class="modal">
+    <div class="modal-content">
+        <span class="close-button">&times;</span>
+
+        <h3>Agendar Consulta</h3>
+
+        <form id="appointment-form">
+            <label for="especialidade">Especialidade</label>
+            <select id="especialidade" required>
+                <option value="">Selecione</option>
+                <option value="Clínico Geral">Clínico Geral</option>
+                <option value="Pediatria">Pediatria</option>
+                <option value="Ginecologia">Ginecologia</option>
+                <option value="Odontologia">Odontologia</option>
+                <option value="Enfermagem">Enfermagem</option>
+            </select>
+
+            <label for="data-consulta">Data</label>
+            <input type="date" id="data-consulta" required>
+
+            <label for="hora-consulta">Hora</label>
+            <input type="time" id="hora-consulta" required>
+
+            <button type="submit" class="btn btn-primary">Confirmar</button>
+        </form>
+    </div>
+</div>
+
+<script src="https://api.mapbox.com/mapbox-gl-js/v2.15.0/mapbox-gl.js"></script>
+<script src="{{ url_for('static', filename='js/fila.js') }}"></script>
+<script src="{{ url_for('static', filename='js/script.js') }}"></script>
+<script src="{{ url_for('static', filename='js/consultas.js') }}"></script>
+</body>
+</html>
