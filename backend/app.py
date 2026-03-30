@@ -2,10 +2,10 @@ import os
 from dotenv import load_dotenv
 from flask import Flask, render_template
 from flask_cors import CORS
-from routes.auth import auth_routes
-from routes.appointment import appointment_routes
-from routes.ubs import ubs_routes
-from database.db import create_tables
+from backend.routes.auth import auth_routes
+from backend.routes.appointment import appointment_routes
+from backend.routes.ubs import ubs_routes
+from backend.database.db import create_tables
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 ENV_PATH = os.path.join(BASE_DIR, ".env")

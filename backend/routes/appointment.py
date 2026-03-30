@@ -1,5 +1,5 @@
 from flask import Blueprint, request, jsonify
-from database.db import get_db_connection
+from backend.database.db import get_db_connection
 from datetime import datetime
 
 appointment_routes = Blueprint("appointment_routes", __name__)
